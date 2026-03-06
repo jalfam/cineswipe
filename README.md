@@ -1,21 +1,23 @@
-<<<<<<< HEAD
-# React + Vite
+# CineSwipe
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A Tinder-style movie rating app with AI-powered recommendations, built with React + Vite and deployed on Vercel.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Swipe right to watchlist, left to skip — or tap any of 6 rating categories
+- 177 curated world-cinema films with smart director-interleaving
+- AI recommendations via Claude (personalized to your taste)
+- Persistent ratings saved to localStorage
+- Keyboard shortcuts: `←/→` to skip/watchlist, `1–6` for categories, `Ctrl+Z` to undo
 
-## React Compiler
+## Setup
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. Clone and install: `npm install`
+2. Add your Anthropic API key as an environment variable on Vercel: `ANTHROPIC_API_KEY`
+3. Deploy to Vercel — the `/api/recommend` serverless function handles AI calls securely server-side
 
-## Expanding the ESLint configuration
+## Dev
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-=======
-# cineswipe
-Cineswipe app
->>>>>>> 86ece7d21116424444d6db2e5d5c4711ab48c1f3
+```bash
+npm run dev
+```
