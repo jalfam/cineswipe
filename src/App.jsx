@@ -224,6 +224,8 @@ export default function CineSwipe() {
   const [exiting, setExiting] = useState(null);
   const [loadingAI, setLoadingAI] = useState(false);
   const [saveStatus, setSaveStatus] = useState(null);
+  const [aiError, setAiError] = useState(null);
+  const [history, setHistory] = useState([]);
   const startX = useRef(0);
 
   const allMovies = useMemo(() => {
@@ -264,6 +266,7 @@ export default function CineSwipe() {
   return () => clearTimeout(t);
 }, [decisions, extraMovies]);
   const decide = (id, cat, dir) => {
+    setHistory(h => [...h.slice(-29), { id, prev: decisions?.[id] ?? null }]);
     if (dir) {
       setExiting({ dir });
       setTimeout(() => {
@@ -274,6 +277,20 @@ export default function CineSwipe() {
     } else {
       setDecisions(p => ({ ...p, [id]: cat }));
     }
+  };
+
+  const undo = () => {
+    setHistory(h => {
+      if (!h.length) return h;
+      const { id, prev } = h[h.length - 1];
+      setDecisions(p => {
+        const next = { ...p };
+        if (prev === null) delete next[id];
+        else next[id] = prev;
+        return next;
+      });
+      return h.slice(0, -1);
+    });
   };
 
   const onPD = e => {
@@ -293,31 +310,48 @@ export default function CineSwipe() {
   const loadMore = async () => {
     if (!decisions) return;
     setLoadingAI(true);
-    const loved   = allMovies.filter(m => decisions[m.id] === "love").map(m => m.title);
-    const liked   = allMovies.filter(m => decisions[m.id] === "fine").map(m => m.title);
-    const dislike = allMovies.filter(m => decisions[m.id] === "dislike").map(m => m.title);
+    setAiError(null);
+    const loved    = allMovies.filter(m => decisions[m.id] === "love").map(m => m.title);
+    const liked    = allMovies.filter(m => decisions[m.id] === "fine").map(m => m.title);
+    const disliked = allMovies.filter(m => decisions[m.id] === "dislike").map(m => m.title);
     const existing = allMovies.map(m => m.title);
-    const prompt = `You are a film expert. Based on this user's taste, recommend 15 new movies.
-LOVED: ${loved.slice(0,12).join(", ")}
-LIKED: ${liked.slice(0,8).join(", ")}
-DISLIKED: ${dislike.slice(0,5).join(", ")}
-Exclude (already in list): ${existing.join(", ")}
-Rules: smart/cerebral films, great construction, sci-fi, thrillers, genre-bending dramas. Max 2 films per director. Include diverse countries/eras.
-Return ONLY a JSON array, no markdown:
-[{"title":"...","year":1999,"genre":"Thriller","director":"...","pitch":"One sentence in Spanish why this user will love it."}]`;
     try {
-      const res = await fetch("https://api.anthropic.com/v1/messages", {
+      const res = await fetch("/api/recommend", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ model: "claude-sonnet-4-20250514", max_tokens: 1000, messages: [{ role: "user", content: prompt }] }),
+        body: JSON.stringify({ loved, liked, disliked, existing }),
       });
-      const data = await res.json();
-      const text = data.content?.find(b => b.type === "text")?.text || "[]";
-      const movies = JSON.parse(text.replace(/```json|```/g, "").trim());
+      if (!res.ok) throw new Error(`Server responded ${res.status}`);
+      const { movies } = await res.json();
       setExtraMovies(prev => [...prev, ...movies.map((m, i) => ({ ...m, id: `ai-${Date.now()}-${i}`, genre: m.genre || "Drama" }))]);
-    } catch (e) { console.error("AI load failed", e); }
+    } catch (e) {
+      console.error("AI load failed", e);
+      setAiError("No se pudieron cargar recomendaciones. Verifica la configuración del servidor.");
+      setTimeout(() => setAiError(null), 5000);
+    }
     setLoadingAI(false);
   };
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handler = e => {
+      if (view !== "swipe" || !current) return;
+      if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+      const catKeys = { "1":"love", "2":"fine", "3":"dislike", "4":"unknown", "5":"skip", "6":"watchlist" };
+      if (e.key === "ArrowRight") { e.preventDefault(); decide(current.id, "watchlist", "right"); }
+      else if (e.key === "ArrowLeft") { e.preventDefault(); decide(current.id, "skip", "left"); }
+      else if (catKeys[e.key]) {
+        const cat = catKeys[e.key];
+        const dir = (cat === "love" || cat === "fine" || cat === "watchlist") ? "right" : "left";
+        decide(current.id, cat, dir);
+      } else if (e.key === "z" && (e.ctrlKey || e.metaKey)) {
+        e.preventDefault();
+        undo();
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [current, view]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const gs     = current ? (GENRE_COLORS[current.genre] || GENRE_COLORS.Drama) : null;
   const swipeR = Math.max(0, Math.min(1, drag.x / 100));
@@ -367,10 +401,15 @@ Return ONLY a JSON array, no markdown:
       <div style={{ width:"100%", padding:"16px 16px 6px", display:"flex", justifyContent:"space-between", alignItems:"flex-start" }}>
         <div>
           <div style={{ fontFamily:"'Playfair Display',serif", fontSize:21, color:"#f0e6d0", letterSpacing:"-0.5px" }}>CineSwipe 🎬</div>
-          <div style={{ fontSize:9.5, color:"#666", marginTop:2 }}>
-            {undecided.length} pendientes · {decided}/{total}
+          <div style={{ fontSize:9.5, color:"#666", marginTop:2, display:"flex", alignItems:"center", gap:5 }}>
+            <span>{undecided.length} pendientes · {decided}/{total}</span>
             {saveStatus==="saving" && <span style={{color:"#555"}}> · guardando…</span>}
             {saveStatus==="saved"  && <span style={{color:"#4ade80"}}> · ✓ guardado</span>}
+            {history.length > 0 && (
+              <button onClick={undo} style={{background:"none",border:"none",color:"#555",fontSize:9.5,cursor:"pointer",padding:"0 3px",textDecoration:"underline",fontFamily:"'DM Sans',sans-serif"}}>
+                ↩ deshacer
+              </button>
+            )}
           </div>
         </div>
         <div style={{ display:"flex", gap:5 }}>
@@ -430,16 +469,20 @@ Return ONLY a JSON array, no markdown:
 
               <div style={{display:"grid",gridTemplateColumns:"repeat(6,1fr)",gap:5,width:"100%"}}>
                 {Object.entries(CATS).map(([key,cat]) => (
-                  <button key={key} onClick={() => decide(current.id,key)} style={{background:"#0e0e0e",border:"1px solid #181818",borderRadius:12,padding:"9px 3px 7px",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:4}}
+                  <button key={key} onClick={() => {
+                    const dir = (key === "love" || key === "fine" || key === "watchlist") ? "right" : "left";
+                    decide(current.id, key, dir);
+                  }} style={{background:"#0e0e0e",border:"1px solid #181818",borderRadius:12,padding:"9px 3px 7px",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:4,transition:"background 0.1s"}}
                     onPointerDown={e=>e.currentTarget.style.background="#181818"}
                     onPointerUp={e=>e.currentTarget.style.background="#0e0e0e"}
+                    onPointerLeave={e=>e.currentTarget.style.background="#0e0e0e"}
                   >
                     <span style={{fontSize:19,lineHeight:1}}>{cat.emoji}</span>
                     <span style={{fontSize:7.5,color:"#777",textAlign:"center",lineHeight:1.25}}>{cat.label}</span>
                   </button>
                 ))}
               </div>
-              <div style={{fontSize:9.5,color:"#555",marginTop:10,textAlign:"center"}}>→ ⭐ ver &nbsp;·&nbsp; ← 🚫 pasar</div>
+              <div style={{fontSize:9.5,color:"#555",marginTop:10,textAlign:"center"}}>→ ⭐ ver &nbsp;·&nbsp; ← 🚫 pasar &nbsp;·&nbsp; teclas 1–6</div>
               {undecided.length < 8 && (
                 <button onClick={loadMore} disabled={loadingAI} style={{marginTop:10,background:"transparent",border:"1px solid #2a2a2a",color:loadingAI?"#444":"#888",borderRadius:20,padding:"6px 16px",fontSize:10.5,cursor:loadingAI?"default":"pointer"}}>
                   {loadingAI?"✦ Generando…":`✦ Quedan ${undecided.length} — cargar más con IA`}
@@ -554,6 +597,19 @@ Return ONLY a JSON array, no markdown:
             {loadingAI?"Generando recomendaciones personalizadas…":"✦ Pedir 15 recomendaciones con IA"}
           </button>
           {extraMovies.length>0&&<div style={{fontSize:9.5,color:"#555",textAlign:"center"}}>{extraMovies.length} películas cargadas por IA</div>}
+        </div>
+      )}
+
+      {/* ERROR TOAST */}
+      {aiError && (
+        <div style={{
+          position:"fixed", bottom:24, left:"50%", transform:"translateX(-50%)",
+          background:"#1a0505", border:"1px solid #ef444440", color:"#ef4444",
+          borderRadius:12, padding:"11px 20px", fontSize:12, zIndex:200,
+          maxWidth:320, textAlign:"center", boxShadow:"0 4px 24px rgba(0,0,0,0.85)",
+          pointerEvents:"none", lineHeight:1.5,
+        }}>
+          {aiError}
         </div>
       )}
     </div>
