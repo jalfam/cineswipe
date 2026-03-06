@@ -319,12 +319,13 @@ export default function CineSwipe() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ loved, liked, disliked, existing }),
       });
-      if (!res.ok) throw new Error(`Server responded ${res.status}`);
-      const { movies } = await res.json();
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || `Server responded ${res.status}`);
+      const { movies } = data;
       setExtraMovies(prev => [...prev, ...movies.map((m, i) => ({ ...m, id: `ai-${Date.now()}-${i}`, genre: m.genre || "Drama" }))]);
     } catch (e) {
       console.error("AI load failed", e);
-      setAiError("No se pudieron cargar recomendaciones. Verifica la configuración del servidor.");
+      setAiError(`Error: ${e.message}`);
       setTimeout(() => setAiError(null), 5000);
     }
     setLoadingAI(false);
