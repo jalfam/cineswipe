@@ -280,16 +280,14 @@ export default function CineSwipe() {
   };
 
   const undo = () => {
-    setHistory(h => {
-      if (!h.length) return h;
-      const { id, prev } = h[h.length - 1];
-      setDecisions(p => {
-        const next = { ...p };
-        if (prev === null) delete next[id];
-        else next[id] = prev;
-        return next;
-      });
-      return h.slice(0, -1);
+    if (!history.length) return;
+    const { id, prev } = history[history.length - 1];
+    setHistory(h => h.slice(0, -1));
+    setDecisions(p => {
+      const next = { ...p };
+      if (prev === null) delete next[id];
+      else next[id] = prev;
+      return next;
     });
   };
 
@@ -332,26 +330,32 @@ export default function CineSwipe() {
     setLoadingAI(false);
   };
 
+  // Keep fresh refs so keyboard handler never has stale closures
+  const decideRef = useRef(decide);
+  decideRef.current = decide;
+  const undoRef = useRef(undo);
+  undoRef.current = undo;
+
   // Keyboard shortcuts
   useEffect(() => {
     const handler = e => {
       if (view !== "swipe" || !current) return;
       if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
       const catKeys = { "1":"love", "2":"fine", "3":"dislike", "4":"unknown", "5":"skip", "6":"watchlist" };
-      if (e.key === "ArrowRight") { e.preventDefault(); decide(current.id, "watchlist", "right"); }
-      else if (e.key === "ArrowLeft") { e.preventDefault(); decide(current.id, "skip", "left"); }
+      if (e.key === "ArrowRight") { e.preventDefault(); decideRef.current(current.id, "watchlist", "right"); }
+      else if (e.key === "ArrowLeft") { e.preventDefault(); decideRef.current(current.id, "skip", "left"); }
       else if (catKeys[e.key]) {
         const cat = catKeys[e.key];
         const dir = (cat === "love" || cat === "fine" || cat === "watchlist") ? "right" : "left";
-        decide(current.id, cat, dir);
+        decideRef.current(current.id, cat, dir);
       } else if (e.key === "z" && (e.ctrlKey || e.metaKey)) {
         e.preventDefault();
-        undo();
+        undoRef.current();
       }
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [current, view]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [current, view]);
 
   const gs     = current ? (GENRE_COLORS[current.genre] || GENRE_COLORS.Drama) : null;
   const swipeR = Math.max(0, Math.min(1, drag.x / 100));
