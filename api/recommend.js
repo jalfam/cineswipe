@@ -28,7 +28,7 @@ Return ONLY a JSON array, no markdown:
         "anthropic-version": "2023-06-01",
       },
       body: JSON.stringify({
-        model: "claude-haiku-4-5-20251001",
+        model: "claude-haiku-4-5",
         max_tokens: 1200,
         messages: [{ role: "user", content: prompt }],
       }),
@@ -36,7 +36,9 @@ Return ONLY a JSON array, no markdown:
 
     if (!response.ok) {
       const err = await response.json().catch(() => ({}));
-      return res.status(response.status).json({ error: err.error?.message || "Anthropic API error" });
+      const detail = err.error?.message || "Anthropic API error";
+      console.error("Anthropic error:", response.status, detail);
+      return res.status(response.status).json({ error: detail });
     }
 
     const data = await response.json();
