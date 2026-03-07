@@ -526,15 +526,44 @@ export default function CineSwipe() {
     if (!decisions) return;
     setLoadingAI(true);
     setAiError(null);
-    const loved    = allMovies.filter(m => decisions[m.id] === "love").map(m => m.title);
-    const liked    = allMovies.filter(m => decisions[m.id] === "fine").map(m => m.title);
-    const disliked = allMovies.filter(m => decisions[m.id] === "dislike").map(m => m.title);
-    const existing = allMovies.map(m => m.title);
+
+    // Build a rich taste profile from all decisions
+    const lovedMovies    = allMovies.filter(m => decisions[m.id] === "love");
+    const likedMovies    = allMovies.filter(m => decisions[m.id] === "fine");
+    const dislikedMovies = allMovies.filter(m => decisions[m.id] === "dislike" || decisions[m.id] === "skip");
+
+    const genreScore = {}, genreDislike = {}, dirScore = {};
+    [...lovedMovies.map(m=>({...m,w:2})), ...likedMovies.map(m=>({...m,w:1}))].forEach(({genre, director, w}) => {
+      genreScore[genre]  = (genreScore[genre]  || 0) + w;
+      dirScore[director] = (dirScore[director] || 0) + w;
+    });
+    dislikedMovies.forEach(({genre}) => { genreDislike[genre] = (genreDislike[genre] || 0) + 1; });
+
+    const topGenres    = Object.entries(genreScore).sort((a,b)=>b[1]-a[1]).slice(0,5).map(([g])=>g);
+    const topDirs      = Object.entries(dirScore).sort((a,b)=>b[1]-a[1]).slice(0,6).map(([d])=>d);
+    const avoidGenres  = Object.entries(genreDislike)
+      .filter(([g,n]) => n >= 2 && !(genreScore[g] > genreDislike[g]))
+      .sort((a,b)=>b[1]-a[1]).slice(0,3).map(([g])=>g);
+
+    const lovedYears  = lovedMovies.map(m => m.year);
+    const avgYear     = lovedYears.length ? Math.round(lovedYears.reduce((a,b)=>a+b,0)/lovedYears.length) : 2000;
+
+    const payload = {
+      lovedTitles:    lovedMovies.slice(0,12).map(m => m.title),
+      likedTitles:    likedMovies.slice(0,8).map(m => m.title),
+      dislikedTitles: dislikedMovies.slice(0,6).map(m => m.title),
+      topGenres,
+      avoidGenres,
+      topDirs,
+      avgYear,
+      existing: allMovies.map(m => m.title),
+    };
+
     try {
       const res = await fetch("/api/recommend", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ loved, liked, disliked, existing }),
+        body: JSON.stringify(payload),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || `Server responded ${res.status}`);
