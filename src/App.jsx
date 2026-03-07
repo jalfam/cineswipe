@@ -239,6 +239,159 @@ const BASE_MOVIES = [
   { id:"tg1", title:"Michael Clayton",                   year:2007, genre:"Thriller", director:"Tony Gilroy",            pitch:"Un abogado especialista en tapar problemas descubre uno que no puede tapar. El thriller más elegante de los 2000s." },
   // Francis Ford Coppola
   { id:"fc1", title:"Apocalypse Now",                    year:1979, genre:"Drama",    director:"Francis Ford Coppola",   pitch:"Un soldado debe eliminar a un coronel que se volvió dios en la selva. El corazón de las tinieblas en Vietnam." },
+
+  // ── COMEDIAS ──────────────────────────────────────────────────────────────
+  // Billy Wilder
+  { id:"co01", title:"Some Like It Hot",                 year:1959, genre:"Comedia",  director:"Billy Wilder",           pitch:"Dos músicos se disfrazan de mujeres para escapar de la mafia. Marilyn Monroe. La comedia perfecta según todo el mundo." },
+  { id:"co02", title:"The Apartment",                    year:1960, genre:"Comedia",  director:"Billy Wilder",           pitch:"Un empleado presta su depa a sus jefes para sus aventuras. Wilder combinando comedia y corazón como nadie." },
+  // Woody Allen
+  { id:"co03", title:"Annie Hall",                       year:1977, genre:"Comedia",  director:"Woody Allen",            pitch:"Una pareja de intelectuales neoyorquinos se enamora y se separa. Redefinió la comedia romántica para siempre." },
+  { id:"co04", title:"Manhattan",                        year:1979, genre:"Comedia",  director:"Woody Allen",            pitch:"Un escritor y sus complicaciones amorosas en Nueva York. Woody Allen enamorado de su ciudad. Blanco y negro perfecto." },
+  { id:"co05", title:"Crimes and Misdemeanors",          year:1989, genre:"Comedia",  director:"Woody Allen",            pitch:"Un hombre exitoso considera asesinar a su amante. Comedia oscura sobre la moral, la impunidad y Dios. Mejor Woody Allen." },
+  // Mel Brooks
+  { id:"co06", title:"Blazing Saddles",                  year:1974, genre:"Comedia",  director:"Mel Brooks",             pitch:"Un sheriff negro en un pueblo del salvaje oeste lleno de racistas. Mel Brooks destruyendo el western con humor absoluto." },
+  { id:"co07", title:"Young Frankenstein",               year:1974, genre:"Comedia",  director:"Mel Brooks",             pitch:"Parodia perfecta del clásico de terror. Gene Wilder y Mel Brooks en su mejor forma. Blanco y negro, homenaje y burla." },
+  // Coen Brothers (comedia)
+  { id:"co08", title:"The Big Lebowski",                 year:1998, genre:"Comedia",  director:"Coen Brothers",          pitch:"Un hombre equivocado, una alfombra robada y los Coen en modo absurdo total. El Dude abides. Culto máximo." },
+  { id:"co09", title:"Burn After Reading",               year:2008, genre:"Comedia",  director:"Coen Brothers",          pitch:"Espías de la CIA y ciudadanos ordinarios terriblemente incompetentes. Los Coen en modo comedia negra afilada." },
+  // Edgar Wright
+  { id:"co10", title:"Shaun of the Dead",                year:2004, genre:"Comedia",  director:"Edgar Wright",           pitch:"Un chico sin rumbo enfrenta un apocalipsis zombie en su barrio londinense. La mejor comedia de horror jamás hecha." },
+  { id:"co11", title:"Hot Fuzz",                         year:2007, genre:"Comedia",  director:"Edgar Wright",           pitch:"Un superpolicía enviado a un pueblo tranquilo que esconde algo. Acción, misterio y humor de otro nivel." },
+  { id:"co12", title:"The World's End",                  year:2013, genre:"Comedia",  director:"Edgar Wright",           pitch:"Cinco amigos intentan repetir una legendaria pub crawl de su juventud. El final de la trilogía Cornetto. Inesperadamente emotiva." },
+  // Taika Waititi
+  { id:"co13", title:"What We Do in the Shadows",        year:2014, genre:"Comedia",  director:"Taika Waititi",          pitch:"Mockumentary sobre vampiros con roommates en Wellington, Nueva Zelanda. Humor absurdo perfecto. Taika Waititi puro." },
+  { id:"co14", title:"Hunt for the Wilderpeople",        year:2016, genre:"Comedia",  director:"Taika Waititi",          pitch:"Un niño en adopción y su tutor gruñón huyen hacia el bush de Nueva Zelanda. Humor, corazón y aventura." },
+  { id:"co15", title:"Jojo Rabbit",                      year:2019, genre:"Comedia",  director:"Taika Waititi",          pitch:"Un niño nazi tiene a Hitler imaginario como amigo del alma. Sátira sobre el fanatismo que termina siendo una carta de amor." },
+  // Ruben Östlund
+  { id:"co16", title:"Force Majeure",                    year:2014, genre:"Comedia",  director:"Ruben Östlund",          pitch:"Un padre huye de una avalancha abandonando a su familia. Cinco días de consecuencias incómodas. Suecia, invierno, humor cruel." },
+  { id:"co17", title:"Triangle of Sadness",              year:2022, genre:"Comedia",  director:"Ruben Östlund",          pitch:"Un yate de millonarios naufraga. Lo que pasa después es una clase magistral de sátira de clases. Palme d'Or." },
+  { id:"co18", title:"The Square",                       year:2017, genre:"Comedia",  director:"Ruben Östlund",          pitch:"Un curador de arte moderno enfrenta una crisis moral y de relaciones públicas. Östlund apuntando a la hipocresía ilustrada." },
+  // Armando Iannucci
+  { id:"co19", title:"In the Loop",                      year:2009, genre:"Comedia",  director:"Armando Iannucci",       pitch:"La guerra de Irak vista desde los pasillos del gobierno británico y americano. Política e incompetencia como comedia brutal." },
+  { id:"co20", title:"The Death of Stalin",              year:2017, genre:"Comedia",  director:"Armando Iannucci",       pitch:"Los días después de la muerte de Stalin entre sus colaboradores aterrorizados. Comedia negra histórica brillante." },
+  // Mike Judge
+  { id:"co21", title:"Office Space",                     year:1999, genre:"Comedia",  director:"Mike Judge",             pitch:"Un programador odia su trabajo corporativo y decide simplemente no hacer nada. El Office avant la lettre. Perfecta." },
+  { id:"co22", title:"Idiocracy",                        year:2006, genre:"Comedia",  director:"Mike Judge",             pitch:"Un hombre promedio despierta 500 años en el futuro y es el más inteligente de todos. Profética y aterradora." },
+  // Christopher Guest / Rob Reiner
+  { id:"co23", title:"Best in Show",                     year:2000, genre:"Comedia",  director:"Christopher Guest",      pitch:"Competencia de perros en Estados Unidos. Mockumentary sobre la locura de sus dueños. Christopher Guest en su mejor forma." },
+  { id:"co24", title:"This Is Spinal Tap",               year:1984, genre:"Comedia",  director:"Rob Reiner",             pitch:"El documental falso de una banda de rock pesado en decadencia. El mockumentary que creó el género. Once to eleven." },
+  // Harold Ramis
+  { id:"co25", title:"Groundhog Day",                    year:1993, genre:"Comedia",  director:"Harold Ramis",           pitch:"Un meteorólogo revive el mismo día una y otra vez en un pueblo de Pennsylvania. Bill Murray. La más filosófica de las comedias." },
+  // Alexander Payne
+  { id:"co26", title:"Election",                         year:1999, genre:"Comedia",  director:"Alexander Payne",        pitch:"Una estudiante ambiciosa vs. un maestro frustrado en las elecciones del colegio. Reese Witherspoon afilada. Oscura y divertida." },
+  { id:"co27", title:"Sideways",                         year:2004, genre:"Comedia",  director:"Alexander Payne",        pitch:"Dos amigos en un road trip vinícola por California. El fracaso, la amistad y el vino. Payne más amargo que nunca." },
+  // Adam McKay
+  { id:"co28", title:"The Big Short",                    year:2015, genre:"Comedia",  director:"Adam McKay",             pitch:"La crisis financiera de 2008 explicada con humor negro y cuarta pared. Más entretenida de lo que tiene derecho a ser." },
+  { id:"co29", title:"Don't Look Up",                    year:2021, genre:"Comedia",  director:"Adam McKay",             pitch:"Dos astrónomos descubren un cometa mortal y nadie les cree. Sátira del negacionismo científico y los medios. Incómoda." },
+  // Sacha Baron Cohen
+  { id:"co30", title:"Borat",                            year:2006, genre:"Comedia",  director:"Larry Charles",          pitch:"Un periodista kazakho recorre Estados Unidos. Cohen sacando lo peor de la gente real haciéndolos actuar sin saberlo. Brutal." },
+  // Rob Reiner
+  { id:"co31", title:"When Harry Met Sally",             year:1989, genre:"Comedia",  director:"Rob Reiner",             pitch:"¿Pueden ser amigos un hombre y una mujer? Nora Ephron, Billy Crystal y Meg Ryan. La comedia romántica adulta definitiva." },
+  // Monty Python
+  { id:"co32", title:"Monty Python and the Holy Grail",  year:1975, genre:"Comedia",  director:"Terry Gilliam",          pitch:"El Rey Arturo busca el Santo Grial. El humor absurdo british más influyente de la historia. Caballos de coco incluidos." },
+  { id:"co33", title:"Life of Brian",                    year:1979, genre:"Comedia",  director:"Terry Jones",            pitch:"Un hombre confundido con Jesús. Monty Python atacando la religión organizada sin miedo. La más valiente y más divertida." },
+  // Jacques Tati
+  { id:"co34", title:"Playtime",                         year:1967, genre:"Comedia",  director:"Jacques Tati",           pitch:"París rediseñada como laberinto de vidrio y acero. Tati sin diálogos, solo gags visuales perfectos. Cine puro sin igual." },
+  // Luis Buñuel
+  { id:"co35", title:"The Discreet Charm of the Bourgeoisie", year:1972, genre:"Comedia", director:"Luis Buñuel",        pitch:"Seis burgueses intentan cenar juntos pero algo siempre lo impide. Buñuel burlándose de su propia clase. Surreal y precisa." },
+  // Charlie Chaplin
+  { id:"co36", title:"The Great Dictator",               year:1940, genre:"Comedia",  director:"Charlie Chaplin",        pitch:"Chaplin parodiando a Hitler en plena guerra. El discurso final es de los más emocionantes en la historia del cine." },
+  { id:"co37", title:"Modern Times",                     year:1936, genre:"Comedia",  director:"Charlie Chaplin",        pitch:"Chaplin como obrero en la era industrial. Gags perfectos, crítica social y una de las mejores actuaciones de la historia." },
+  // Preston Sturges
+  { id:"co38", title:"Sullivan's Travels",               year:1941, genre:"Comedia",  director:"Preston Sturges",        pitch:"Un director de Hollywood quiere hacer cine serio y aprende que la comedia puede salvar vidas. Meta y hermosa." },
+  // Jason Reitman
+  { id:"co39", title:"Thank You for Smoking",            year:2005, genre:"Comedia",  director:"Jason Reitman",          pitch:"Un lobbysta del tabaco navega su trabajo sin ética con total encanto. Sátira americana afilada y muy divertida." },
+  { id:"co40", title:"Juno",                             year:2007, genre:"Comedia",  director:"Jason Reitman",          pitch:"Una adolescente queda embarazada y decide darlo en adopción. Diálogos perfectos, humor seco, corazón enorme." },
+  { id:"co41", title:"Up in the Air",                    year:2009, genre:"Comedia",  director:"Jason Reitman",          pitch:"Un hombre que vive en aviones despidiendo gente enfrenta su propia crisis existencial. Clooney en su mejor papel." },
+  // David O. Russell
+  { id:"co42", title:"Silver Linings Playbook",          year:2012, genre:"Comedia",  director:"David O. Russell",       pitch:"Un hombre bipolar sale del psiquiátrico y conoce a una mujer igual de rota. Jennifer Lawrence y Bradley Cooper inesperados." },
+  // Todd Phillips / Greg Mottola / Judd Apatow
+  { id:"co43", title:"The Hangover",                     year:2009, genre:"Comedia",  director:"Todd Phillips",          pitch:"Tres amigos despiertan en Las Vegas sin recuerdo de la noche anterior y con un tigre en el cuarto. Comedia de situación perfecta." },
+  { id:"co44", title:"Superbad",                         year:2007, genre:"Comedia",  director:"Greg Mottola",           pitch:"Dos amigos intentan conseguir alcohol para una fiesta en su última noche del bachillerato. La mejor comedia adolescente del siglo." },
+  { id:"co45", title:"The 40-Year-Old Virgin",           year:2005, genre:"Comedia",  director:"Judd Apatow",            pitch:"Un hombre de 40 años que nunca ha tenido sexo y sus amigos decididos a cambiar eso. Steve Carell. Más ternura que vergüenza." },
+  // Yorgos Lanthimos (comedia oscura)
+  { id:"co46", title:"Dogtooth",                         year:2009, genre:"Comedia",  director:"Yorgos Lanthimos",       pitch:"Tres adultos criados en casa por padres que les mienten sobre el mundo. Lanthimos antes de ser Lanthimos. Perturbadora y única." },
+  // Clásicos británicos
+  { id:"co47", title:"A Fish Called Wanda",              year:1988, genre:"Comedia",  director:"Charles Crichton",       pitch:"Cuatro ladrones se traicionan mutuamente. John Cleese, Kevin Kline y Jamie Lee Curtis. El humor inglés-americano perfecto." },
+  { id:"co48", title:"Withnail and I",                   year:1987, genre:"Comedia",  director:"Bruce Robinson",         pitch:"Dos actores desempleados y borrachos en el Londres de los 60s. Culto total. La más amarga y hermosa de las comedias británicas." },
+  { id:"co49", title:"Four Weddings and a Funeral",      year:1994, genre:"Comedia",  director:"Mike Newell",            pitch:"Un inglés torpe asiste a cuatro bodas enamorándose en cada una. Hugh Grant en su papel definitivo. Richard Curtis en su cima." },
+  // Jean-Pierre Jeunet
+  { id:"co50", title:"Amélie",                           year:2001, genre:"Comedia",  director:"Jean-Pierre Jeunet",     pitch:"Una chica tímida en París decide mejorar la vida de los que la rodean. La película francesa más vista del mundo. Irresistible." },
+
+  // ── HORROR SOBRENATURAL ───────────────────────────────────────────────────
+  // James Wan
+  { id:"hr01", title:"The Conjuring",                    year:2013, genre:"Horror",   director:"James Wan",              pitch:"Los investigadores del paranormal Ed y Lorraine Warren en su caso más aterrador. El mejor horror sobrenatural de los 2010s." },
+  { id:"hr02", title:"The Conjuring 2",                  year:2016, genre:"Horror",   director:"James Wan",              pitch:"Los Warren en Enfield, el poltergeist más famoso de Europa. Wan mejorando la fórmula de la primera. La monja, el valack." },
+  { id:"hr03", title:"Insidious",                        year:2010, genre:"Horror",   director:"James Wan",              pitch:"Una familia cuyo hijo cae en coma y empieza lo que no querías ver. El horror sobrenatural de los 2010s en estado puro." },
+  { id:"hr04", title:"Insidious: Chapter 2",             year:2013, genre:"Horror",   director:"James Wan",              pitch:"La historia continúa sin pausa desde donde terminó la primera. El misterio del Further se expande de forma inesperada." },
+  // Clásicos del horror
+  { id:"hr05", title:"The Exorcist",                     year:1973, genre:"Horror",   director:"William Friedkin",       pitch:"Una niña poseída por el diablo y dos sacerdotes al límite. La más aterradora de la historia. Prohibida en varios países en su época." },
+  { id:"hr06", title:"Rosemary's Baby",                  year:1968, genre:"Horror",   director:"Roman Polanski",         pitch:"Una mujer embarazada sospecha que sus vecinos y su esposo planean algo con su bebé. Polanski creando el horror psicológico total." },
+  { id:"hr07", title:"The Omen",                         year:1976, genre:"Horror",   director:"Richard Donner",         pitch:"Un diplomático descubre que su hijo adoptivo puede ser el Anticristo. El terror religioso más efectivo de los años 70s." },
+  { id:"hr08", title:"Poltergeist",                      year:1982, genre:"Horror",   director:"Tobe Hooper",            pitch:"Una familia suburbana es aterrorizada por espíritus que raptan a su hija. El horror doméstico de Spielberg/Hooper. Clásico absoluto." },
+  // John Carpenter
+  { id:"hr09", title:"The Thing",                        year:1982, genre:"Horror",   director:"John Carpenter",         pitch:"Una criatura alienígena en la Antártida que puede imitar a cualquier ser vivo. Carpenter en su cima. El suspenso más claustrofóbico." },
+  { id:"hr10", title:"Halloween",                        year:1978, genre:"Horror",   director:"John Carpenter",         pitch:"Un asesino escapa el día de Halloween y vuelve a su pueblo. La película que creó el slasher moderno. Cero presupuesto, terror total." },
+  // Wes Craven
+  { id:"hr11", title:"A Nightmare on Elm Street",        year:1984, genre:"Horror",   director:"Wes Craven",             pitch:"Un asesino quemado que ataca en tus sueños. Craven inventando a Freddy Krueger. El horror más original de los 80s." },
+  { id:"hr12", title:"Scream",                           year:1996, genre:"Horror",   director:"Wes Craven",             pitch:"Un asesino llama a sus víctimas antes de atacarlas. Deconstrucción y celebración del slasher al mismo tiempo. Inteligente." },
+  // Scott Derrickson
+  { id:"hr13", title:"Sinister",                         year:2012, genre:"Horror",   director:"Scott Derrickson",       pitch:"Un escritor de true crime encuentra películas snuff en su nuevo ático. La más aterradora de los 2010s según estudios científicos." },
+  { id:"hr14", title:"The Black Phone",                  year:2022, genre:"Horror",   director:"Scott Derrickson",       pitch:"Un niño secuestrado recibe llamadas de las víctimas anteriores del asesino desde un teléfono desconectado. Ethan Hawke perturbador." },
+  // Mike Flanagan
+  { id:"hr15", title:"Oculus",                           year:2013, genre:"Horror",   director:"Mike Flanagan",          pitch:"Un espejo antiguo que distorsiona la realidad de quienes lo rodean. Flanagan jugando con el tiempo y la percepción. Inteligente." },
+  { id:"hr16", title:"Doctor Sleep",                     year:2019, genre:"Horror",   director:"Mike Flanagan",          pitch:"Danny Torrance adulto debe proteger a una niña con el don del resplandor. La secuela de El Resplandor que no esperabas." },
+  // Jennifer Kent
+  { id:"hr17", title:"The Babadook",                     year:2014, genre:"Horror",   director:"Jennifer Kent",          pitch:"Una madre viuda y su hijo aterrorizado por un monstruo de un libro. La metáfora del duelo más aterradora del cine reciente." },
+  // David Robert Mitchell
+  { id:"hr18", title:"It Follows",                       year:2014, genre:"Horror",   director:"David Robert Mitchell",  pitch:"Una entidad que camina hacia ti sin parar, transmitida sexualmente. El horror adolescente más inteligente y perturbador de los 2010s." },
+  // John Krasinski
+  { id:"hr19", title:"A Quiet Place",                    year:2018, genre:"Horror",   director:"John Krasinski",         pitch:"Una familia sobrevive en un mundo donde los monstruos cazan por sonido. Tensión sin música, silencio como arma. Perfecta." },
+  { id:"hr20", title:"A Quiet Place Part II",            year:2021, genre:"Horror",   director:"John Krasinski",         pitch:"La familia Abbot explora un mundo más amplio y más peligroso. Krasinski sabiendo expandir el mito sin perder la tensión." },
+  // Alejandro Amenábar
+  { id:"hr21", title:"The Others",                       year:2001, genre:"Horror",   director:"Alejandro Amenábar",     pitch:"Una mujer en una mansión brumosa protege a sus hijos fotosensibles y algo más vive con ellos. El giro que no ves venir." },
+  // Tomas Alfredson
+  { id:"hr22", title:"Let the Right One In",             year:2008, genre:"Horror",   director:"Tomas Alfredson",        pitch:"Un niño solitario se hace amigo de una vampira que lleva siglos con 12 años. Suecia, nieve, amor y horror. Hermosa y perturbadora." },
+  // Guillermo del Toro
+  { id:"hr23", title:"The Devil's Backbone",             year:2001, genre:"Horror",   director:"Guillermo del Toro",     pitch:"Un niño en un orfanato de la guerra civil española con el fantasma de un compañero muerto. Del Toro antes de El laberinto del fauno." },
+  // Dario Argento
+  { id:"hr24", title:"Suspiria",                         year:1977, genre:"Horror",   director:"Dario Argento",          pitch:"Una bailarina llega a una academia de danza alemana que esconde algo muy oscuro. Argento en su cima. Color, música y terror puro." },
+  // Sam Raimi
+  { id:"hr25", title:"Drag Me to Hell",                  year:2009, genre:"Horror",   director:"Sam Raimi",              pitch:"Una empleada de banco rechaza un préstamo a una anciana y es maldita. Raimi volviendo al horror con energía y humor negro." },
+  { id:"hr26", title:"Evil Dead II",                     year:1987, genre:"Horror",   director:"Sam Raimi",              pitch:"El clásico de horror-comedia de Raimi. Bruce Campbell contra los demonios en una cabaña. El splatstick llevado al extremo absoluto." },
+  // J-Horror
+  { id:"hr27", title:"Ringu",                            year:1998, genre:"Horror",   director:"Hideo Nakata",           pitch:"Una periodista investiga una cinta de video que mata a quien la ve 7 días después. El original japonés que aterrorizó al mundo." },
+  { id:"hr28", title:"Ju-On: The Grudge",                year:2002, genre:"Horror",   director:"Takashi Shimizu",        pitch:"Una maldición en una casa en Tokio que se expande a todos los que la visitan. El horror japonés más contagioso y perturbador." },
+  { id:"hr29", title:"Audition",                         year:1999, genre:"Horror",   director:"Takashi Miike",          pitch:"Un viudo busca nueva pareja a través de una audición falsa. Todo va bien hasta que no. El giro más perturbador del J-horror." },
+  { id:"hr30", title:"Kairo",                            year:2001, genre:"Horror",   director:"Kiyoshi Kurosawa",       pitch:"Los fantasmas de los muertos se filtran por internet. Kurosawa anticipando el horror de la desconexión digital. Profética y única." },
+  { id:"hr31", title:"Cure",                             year:1997, genre:"Horror",   director:"Kiyoshi Kurosawa",       pitch:"Un detective investiga una serie de asesinatos sin motivo aparente. Kurosawa y el hipnotismo como horror existencial. Fría y única." },
+  // Horror reciente
+  { id:"hr32", title:"Lights Out",                       year:2016, genre:"Horror",   director:"David Sandberg",         pitch:"Una entidad que solo existe en la oscuridad persigue a una familia. La premisa más simple y más aterradora del horror reciente." },
+  { id:"hr33", title:"Annabelle: Creation",              year:2017, genre:"Horror",   director:"David Sandberg",         pitch:"El origen de la muñeca más perturbadora del universo Conjuring. Sandberg creando atmósfera densa y terror real en cada cuarto." },
+  { id:"hr34", title:"The Ritual",                       year:2017, genre:"Horror",   director:"David Bruckner",         pitch:"Cuatro amigos se pierden en un bosque escandinavo y algo los sigue. Lovecraft en el norte de Europa. Tensa y muy atmosférica." },
+  { id:"hr35", title:"The Night House",                  year:2020, genre:"Horror",   director:"David Bruckner",         pitch:"Una viuda descubre que su marido suicida le escondía una vida paralela. Rebecca Hall sola vs. algo que no debería existir." },
+  { id:"hr36", title:"Goodnight Mommy",                  year:2014, genre:"Horror",   director:"Severin Fiala",          pitch:"Dos gemelos sospechan que la mujer con la cara vendada no es su madre. Austria, soledad y horror que crece sin parar hasta el final." },
+  // Brian De Palma / Stephen King
+  { id:"hr37", title:"Carrie",                           year:1976, genre:"Horror",   director:"Brian De Palma",         pitch:"Una adolescente con poderes telequinéticos es humillada en su graduación. De Palma y Stephen King en su momento más brutal." },
+  // 1408
+  { id:"hr38", title:"1408",                             year:2007, genre:"Horror",   director:"Mikael Håfström",        pitch:"Un escritor escéptico pasa la noche en una habitación de hotel maldita. John Cusack solo vs. algo que no puedes ver. Más intensa de lo que esperas." },
+  // Ti West
+  { id:"hr39", title:"The House of the Devil",           year:2009, genre:"Horror",   director:"Ti West",                pitch:"Una estudiante cuida una casa en los 80s y algo está muy mal. Ti West reconstruyendo el horror de esa era desde adentro. Paciente y efectiva." },
+  { id:"hr40", title:"The Innkeepers",                   year:2011, genre:"Horror",   director:"Ti West",                pitch:"Dos empleados de un hotel a punto de cerrar buscan fantasmas. Ti West, humor y terror que no sabes cuándo va a atacar." },
+  // Clásicos del género
+  { id:"hr41", title:"Nosferatu",                        year:1922, genre:"Horror",   director:"F.W. Murnau",            pitch:"El vampiro más antiguo del cine. Murnau sin los derechos de Drácula creando algo más oscuro y perturbador que el original." },
+  { id:"hr42", title:"The Haunting",                     year:1963, genre:"Horror",   director:"Robert Wise",            pitch:"Un grupo investiga una mansión en New England. Robert Wise y el horror que nunca muestras. La más elegante de todas las de fantasmas." },
+  { id:"hr43", title:"Diabolique",                       year:1955, genre:"Horror",   director:"Henri-Georges Clouzot",  pitch:"La esposa y la amante de un director de escuela lo matan y el cuerpo desaparece. El thriller de horror más sofisticado de los 50s." },
+  // Kim Jee-woon
+  { id:"hr44", title:"A Tale of Two Sisters",            year:2003, genre:"Horror",   director:"Kim Jee-woon",           pitch:"Dos hermanas regresan a casa de su padre y su nueva madrastra. Kim Jee-woon antes de los thrillers. El horror coreano en su absoluta cima." },
+  // Andy Muschietti
+  { id:"hr45", title:"It",                               year:2017, genre:"Horror",   director:"Andy Muschietti",        pitch:"Un grupo de niños en un pueblo de Maine aterrorizado por un payaso que aparece cada 27 años. Pennywise. El Stephen King más esperado." },
+  // Horror moderno
+  { id:"hr46", title:"The Invisible Man",                year:2020, genre:"Horror",   director:"Leigh Whannell",         pitch:"Una mujer escapa de su novio abusivo solo para ser perseguida por algo que no puede ver. El horror como metáfora del abuso. Elisabeth Moss." },
+  { id:"hr47", title:"Smile",                            year:2022, genre:"Horror",   director:"Parker Finn",            pitch:"Una psicóloga empieza a ver sonrisas perturbadoras en todos después de presenciar un suicidio. La entidad que se transmite persona a persona." },
+  { id:"hr48", title:"Barbarian",                        year:2022, genre:"Horror",   director:"Zach Cregger",           pitch:"Una mujer llega a su Airbnb y descubre que alguien más lo reservó. No googles nada más sobre esta película. Solo véla." },
+  { id:"hr49", title:"M3GAN",                            year:2022, genre:"Horror",   director:"Gerard Johnstone",       pitch:"Una muñeca IA protege a su niña demasiado bien. Horror tecnológico con sentido del humor. El personaje más inesperado del género." },
+  { id:"hr50", title:"Talk to Me",                       year:2022, genre:"Horror",   director:"Danny Philippou",        pitch:"Jóvenes descubren que enchufarse la mano embalsamada de un medium les permite ver muertos. El horror australiano más impactante en años." },
 ];
 
 const INITIAL_DECISIONS = {
