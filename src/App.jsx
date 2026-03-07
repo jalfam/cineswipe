@@ -443,6 +443,7 @@ export default function CineSwipe() {
   const [saveStatus, setSaveStatus] = useState(null);
   const [aiError, setAiError] = useState(null);
   const [history, setHistory] = useState([]);
+  const [copyStatus, setCopyStatus] = useState(null); // null | "copied"
   const startX = useRef(0);
 
   const allMovies = useMemo(() => {
@@ -632,6 +633,46 @@ export default function CineSwipe() {
     };
   };
   const profile = getProfile();
+
+  const buildClaudePrompt = () => {
+    if (!decisions) return "";
+    const loved    = allMovies.filter(m => decisions[m.id] === "love");
+    const liked    = allMovies.filter(m => decisions[m.id] === "fine");
+    const disliked = allMovies.filter(m => decisions[m.id] === "dislike" || decisions[m.id] === "skip");
+    const genreScore = {}, genreDislike = {}, dirScore = {};
+    [...loved.map(m=>({...m,w:2})), ...liked.map(m=>({...m,w:1}))].forEach(({genre,director,w}) => {
+      genreScore[genre]  = (genreScore[genre]  || 0) + w;
+      dirScore[director] = (dirScore[director] || 0) + w;
+    });
+    disliked.forEach(({genre}) => { genreDislike[genre] = (genreDislike[genre]||0)+1; });
+    const topGenres   = Object.entries(genreScore).sort((a,b)=>b[1]-a[1]).slice(0,5).map(([g])=>g);
+    const topDirs     = Object.entries(dirScore).sort((a,b)=>b[1]-a[1]).slice(0,6).map(([d])=>d);
+    const avoidGenres = Object.entries(genreDislike).filter(([g,n])=>n>=2&&!(genreScore[g]>genreDislike[g])).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([g])=>g);
+    const lovedYears  = loved.map(m=>m.year);
+    const avgYear     = lovedYears.length ? Math.round(lovedYears.reduce((a,b)=>a+b,0)/lovedYears.length) : 2000;
+    const existing    = allMovies.map(m=>m.title);
+
+    return `Soy un cinéfilo y quiero recomendaciones personalizadas. Este es mi perfil exacto basado en ${loved.length + liked.length} películas valoradas:
+
+GÉNEROS FAVORITOS (rankeados): ${topGenres.join(", ")}
+DIRECTORES FAVORITOS (por afinidad): ${topDirs.join(", ")}
+ERA PREFERIDA: filmes alrededor de ${avgYear} (promedio de mis películas amadas)
+${avoidGenres.length ? `GÉNEROS QUE NO ME GUSTAN: ${avoidGenres.join(", ")}\n` : ""}
+PELÍCULAS QUE AMÉ: ${loved.slice(0,14).map(m=>m.title).join(", ")}
+PELÍCULAS QUE ME GUSTARON: ${liked.slice(0,10).map(m=>m.title).join(", ")}
+${disliked.length ? `PELÍCULAS QUE NO ME GUSTARON: ${disliked.slice(0,6).map(m=>m.title).join(", ")}\n` : ""}
+YA VÍ (no recomendar): ${existing.join(", ")}
+
+Por favor recomiéndame 15 películas que no estén en la lista anterior. Para cada una dame: título, año, director, género, y en una sola frase en español explica por qué crees que ME VA A GUSTAR específicamente basándote en mi perfil.`;
+  };
+
+  const copyProfileForClaude = () => {
+    const text = buildClaudePrompt();
+    navigator.clipboard.writeText(text).then(() => {
+      setCopyStatus("copied");
+      setTimeout(() => setCopyStatus(null), 2500);
+    });
+  };
 
   if (!decisions) return (
     <div style={{ minHeight:"100dvh", background:"#070707", display:"flex", alignItems:"center", justifyContent:"center" }}>
@@ -843,9 +884,17 @@ export default function CineSwipe() {
             ))}
           </div>
 
-          {/* AI button */}
-          <button onClick={loadMore} disabled={loadingAI} style={{background:loadingAI?"#0e0e0e":"#111",border:"1px solid #1a1a1a",color:loadingAI?"#222":"#c8b88a",borderRadius:13,padding:"13px",fontSize:12.5,cursor:loadingAI?"default":"pointer",fontWeight:500,width:"100%"}}>
-            {loadingAI?"Generando recomendaciones personalizadas…":"✦ Pedir 15 recomendaciones con IA"}
+          {/* Copiar perfil para Claude.ai */}
+          <button onClick={copyProfileForClaude} style={{background: copyStatus ? "#0d2818" : "#0e0e0e", border:`1px solid ${copyStatus?"#4ade8040":"#1a1a1a"}`, color: copyStatus ? "#4ade80" : "#c8b88a", borderRadius:13, padding:"13px", fontSize:12.5, cursor:"pointer", fontWeight:500, width:"100%", transition:"all 0.2s"}}>
+            {copyStatus ? "✓ ¡Copiado! Pégalo en claude.ai" : "📋 Copiar perfil para Claude.ai"}
+          </button>
+          <div style={{fontSize:10,color:"#444",textAlign:"center",lineHeight:1.5}}>
+            Copia tu perfil → pégalo en <span style={{color:"#666"}}>claude.ai</span> con tu plan Pro → pide recomendaciones personalizadas
+          </div>
+
+          {/* AI button (si tienes API key) */}
+          <button onClick={loadMore} disabled={loadingAI} style={{background:"#0a0a0a",border:"1px solid #141414",color:loadingAI?"#222":"#555",borderRadius:13,padding:"11px",fontSize:11,cursor:loadingAI?"default":"pointer",width:"100%"}}>
+            {loadingAI?"Generando…":"✦ Cargar más con API (requiere créditos)"}
           </button>
           {extraMovies.length>0&&<div style={{fontSize:9.5,color:"#555",textAlign:"center"}}>{extraMovies.length} películas cargadas por IA</div>}
         </div>
