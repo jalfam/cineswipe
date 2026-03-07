@@ -175,6 +175,70 @@ const BASE_MOVIES = [
   { id:"x43", title:"Dune: Part One",                    year:2021, genre:"Sci-Fi",   director:"Denis Villeneuve",       pitch:"Ya la viste. Solo el prólogo de una épica enorme. No te convenció mucho." },
   { id:"x44", title:"Minority Report",                   year:2002, genre:"Sci-Fi",   director:"Steven Spielberg",       pitch:"Policías que arrestan asesinos antes de que actúen. Spielberg en modo serio." },
   { id:"x45", title:"Annihilation",                      year:2018, genre:"Sci-Fi",   director:"Alex Garland",           pitch:"Zona misteriosa que transforma todo. Visualmente impresionante, algo lenta según tú." },
+  // Lars von Trier
+  { id:"lt1", title:"Melancholia",                       year:2011, genre:"Sci-Fi",   director:"Lars von Trier",         pitch:"Un planeta se acerca a la Tierra el día de una boda. El apocalipsis más hermoso jamás filmado." },
+  { id:"lt2", title:"Dancer in the Dark",                year:2000, genre:"Drama",    director:"Lars von Trier",         pitch:"Una inmigrante ciega que vive en los musicales de su mente. Björk. Demoledora." },
+  // David Cronenberg
+  { id:"cr1", title:"Videodrome",                        year:1983, genre:"Sci-Fi",   director:"David Cronenberg",       pitch:"Un ejecutivo de TV recibe señales que disuelven la realidad. El cuerpo como tecnología. Cronenberg total." },
+  { id:"cr2", title:"A History of Violence",             year:2005, genre:"Thriller", director:"David Cronenberg",       pitch:"Un hombre tranquilo en un pueblo pequeño tiene un pasado que no suelta. Viggo Mortensen inesperado." },
+  { id:"cr3", title:"Eastern Promises",                  year:2007, genre:"Thriller", director:"David Cronenberg",       pitch:"Un médico descubre la conexión de un bebé con la mafia rusa en Londres. Viggo Mortensen brutal." },
+  // Sidney Lumet
+  { id:"sl1", title:"Network",                           year:1976, genre:"Thriller", director:"Sidney Lumet",           pitch:"Un ancla de noticias que enloquece en vivo. La más profética sobre los medios jamás hecha." },
+  { id:"sl2", title:"12 Angry Men",                      year:1957, genre:"Drama",    director:"Sidney Lumet",           pitch:"Doce jurados deciden si un chico es culpable. Todo en un cuarto. Teatro hecho película perfecta." },
+  { id:"sl3", title:"Dog Day Afternoon",                 year:1975, genre:"Thriller", director:"Sidney Lumet",           pitch:"Un asalto bancario que sale muy mal. Al Pacino. El caos como condición humana." },
+  // Jean-Pierre Melville
+  { id:"jm1", title:"Le Samourai",                       year:1967, genre:"Thriller", director:"Jean-Pierre Melville",   pitch:"Un asesino a sueldo en París con una rutina perfecta. El origen del thriller moderno europeo." },
+  { id:"jm2", title:"Le Cercle Rouge",                   year:1970, genre:"Thriller", director:"Jean-Pierre Melville",   pitch:"Un ladrón, un fugitivo y un ex-policía planean un robo imposible. Tensión sin palabras." },
+  // Werner Herzog
+  { id:"wh1", title:"Aguirre, the Wrath of God",         year:1972, genre:"Drama",    director:"Werner Herzog",          pitch:"Conquistadores bajando el Amazonas y un loco que cree ser el elegido. Klaus Kinski desatado." },
+  { id:"wh2", title:"Fitzcarraldo",                      year:1982, genre:"Drama",    director:"Werner Herzog",          pitch:"Un hombre obsesionado con llevar ópera a la selva. Literalmente movieron un barco por una montaña." },
+  // Pedro Almodóvar
+  { id:"pa1", title:"The Skin I Live In",                year:2011, genre:"Thriller", director:"Pedro Almodóvar",        pitch:"Un cirujano plástico y su experimento secreto. Hitchcock visto desde España. Perturbadora." },
+  { id:"pa2", title:"Talk to Her",                       year:2002, genre:"Drama",    director:"Pedro Almodóvar",        pitch:"Dos hombres cuidan a mujeres en coma. Sobre el amor, la obsesión y los límites. Oscar al guión." },
+  // Satoshi Kon
+  { id:"sk1", title:"Perfect Blue",                      year:1997, genre:"Thriller", director:"Satoshi Kon",            pitch:"Una idol pop se convierte en actriz. Realidad y fantasía se disuelven. Influenció a Aronofsky directamente." },
+  { id:"sk2", title:"Paprika",                           year:2006, genre:"Sci-Fi",   director:"Satoshi Kon",            pitch:"Una terapeuta puede entrar en los sueños ajenos. La inspiración de Inception, sin duda." },
+  { id:"sk3", title:"Millennium Actress",                year:2001, genre:"Mystery",  director:"Satoshi Kon",            pitch:"La vida de una actriz contada siguiéndola por sus propias películas. Única en el cine mundial." },
+  // Mamoru Oshii
+  { id:"mo1", title:"Ghost in the Shell",                year:1995, genre:"Sci-Fi",   director:"Mamoru Oshii",           pitch:"Un cyborg policía caza a un hacker fantasma. La base filosófica de Matrix. Anime esencial." },
+  // Kim Jee-woon
+  { id:"kj1", title:"I Saw the Devil",                   year:2010, genre:"Thriller", director:"Kim Jee-woon",           pitch:"Un agente persigue al asesino de su novia sin capturarlo. El thriller de venganza más brutal del cine coreano." },
+  { id:"kj2", title:"A Bittersweet Life",                year:2005, genre:"Thriller", director:"Kim Jee-woon",           pitch:"Un mafioso ejecuta mal una orden y paga las consecuencias. Elegante, estilizada y brutal." },
+  // Na Hong-jin
+  { id:"nh1", title:"The Wailing",                       year:2016, genre:"Horror",   director:"Na Hong-jin",            pitch:"Un policía investiga muertes extrañas en su pueblo y su hija es la siguiente. Aterradora y ambigua." },
+  { id:"nh2", title:"The Chaser",                        year:2008, genre:"Thriller", director:"Na Hong-jin",            pitch:"Un ex-policía busca a una chica antes de que el asesino la mate. Frenética y sin respiro." },
+  // Charlie Kaufman (continued)
+  { id:"ck3", title:"I'm Thinking of Ending Things",     year:2020, genre:"Mystery",  director:"Charlie Kaufman",        pitch:"Una pareja en road trip a casa de los padres. La realidad se deshace capa a capa. Netflix." },
+  // Céline Sciamma
+  { id:"cs1", title:"Portrait of a Lady on Fire",        year:2019, genre:"Drama",    director:"Céline Sciamma",         pitch:"Una pintora y su modelo en la Bretaña del siglo XVIII. El romance más ardiente del cine reciente." },
+  // Joachim Trier
+  { id:"jt1", title:"The Worst Person in the World",     year:2021, genre:"Drama",    director:"Joachim Trier",          pitch:"Una mujer en sus 30s redefiniendo qué quiere de la vida. Noruega, viva y honesta como pocas." },
+  { id:"jt2", title:"Thelma",                            year:2017, genre:"Sci-Fi",   director:"Joachim Trier",          pitch:"Una estudiante noruega descubre poderes inexplicables. Thriller sobrenatural y psicológico." },
+  // Steve McQueen
+  { id:"sm1", title:"Shame",                             year:2011, genre:"Drama",    director:"Steve McQueen",          pitch:"Un hombre adicto al sexo en Nueva York y su hermana que aparece. Fassbender. Incómoda e importante." },
+  { id:"sm2", title:"12 Years a Slave",                  year:2013, genre:"Drama",    director:"Steve McQueen",          pitch:"Un hombre libre es secuestrado y vendido como esclavo. La más importante y difícil de ver." },
+  // Paul Verhoeven
+  { id:"pv1", title:"Starship Troopers",                 year:1997, genre:"Sci-Fi",   director:"Paul Verhoeven",         pitch:"Sátira del fascismo disfrazada de sci-fi de acción sobre soldados vs. insectos gigantes. Brillante." },
+  { id:"pv2", title:"Total Recall",                      year:1990, genre:"Sci-Fi",   director:"Paul Verhoeven",         pitch:"¿Sus recuerdos son reales? Arnold Schwarzenegger y Philip K. Dick. Más inteligente de lo que parece." },
+  // Jeremy Saulnier
+  { id:"js1", title:"Green Room",                        year:2015, genre:"Thriller", director:"Jeremy Saulnier",        pitch:"Una banda punk queda atrapada tras presenciar algo en un bar neonazi. Brutal y sin respiro." },
+  { id:"js2", title:"Blue Ruin",                         year:2013, genre:"Thriller", director:"Jeremy Saulnier",        pitch:"Un vagabundo decide vengarse del asesino de sus padres sin saber cómo. Tensa y muy humana." },
+  // Yeon Sang-ho
+  { id:"ys1", title:"Train to Busan",                    year:2016, genre:"Horror",   director:"Yeon Sang-ho",           pitch:"Apocalipsis zombie en un tren de Seúl a Busan. La mejor película de zombies en décadas." },
+  // William Friedkin
+  { id:"wf1", title:"Sorcerer",                          year:1977, genre:"Thriller", director:"William Friedkin",       pitch:"Cuatro criminales transportan nitroglicerina por la selva. Maestra olvidada del director de El Exorcista." },
+  { id:"wf2", title:"To Live and Die in L.A.",           year:1985, genre:"Thriller", director:"William Friedkin",       pitch:"Agente federal persigue a un falsificador en Los Ángeles. El mejor thriller de los 80s que no viste." },
+  // Kathryn Bigelow
+  { id:"kb1", title:"Zero Dark Thirty",                  year:2012, genre:"Thriller", director:"Kathryn Bigelow",        pitch:"La caza de Bin Laden desde adentro. Larga, precisa, fría. La mejor película sobre el mundo post-9/11." },
+  { id:"kb2", title:"The Hurt Locker",                   year:2008, genre:"Drama",    director:"Kathryn Bigelow",        pitch:"Una unidad de artificieros en Irak. Tensión sin música manipuladora. Oscar mejor película." },
+  // Makoto Shinkai
+  { id:"msh", title:"Your Name",                         year:2016, genre:"Sci-Fi",   director:"Makoto Shinkai",         pitch:"Dos jóvenes en ciudades distintas que se intercambian de cuerpo mientras duermen. Anime perfecto." },
+  // Andrzej Żuławski
+  { id:"az1", title:"Possession",                        year:1981, genre:"Horror",   director:"Andrzej Żuławski",       pitch:"Una pareja en Berlín occidental se separa bajo circunstancias cada vez más extrañas. La más perturbadora del cine europeo." },
+  // Tony Gilroy
+  { id:"tg1", title:"Michael Clayton",                   year:2007, genre:"Thriller", director:"Tony Gilroy",            pitch:"Un abogado especialista en tapar problemas descubre uno que no puede tapar. El thriller más elegante de los 2000s." },
+  // Francis Ford Coppola
+  { id:"fc1", title:"Apocalypse Now",                    year:1979, genre:"Drama",    director:"Francis Ford Coppola",   pitch:"Un soldado debe eliminar a un coronel que se volvió dios en la selva. El corazón de las tinieblas en Vietnam." },
 ];
 
 const INITIAL_DECISIONS = {
